@@ -8,6 +8,7 @@ using System.Collections;
 	[RequireComponent(typeof(MeshFilter))]
 	[RequireComponent(typeof(MeshRenderer))]
 	[RequireComponent(typeof(MeshCollider))]
+	[ExecuteInEditMode]
 public class TileMap : MonoBehaviour {
 
 	public int size_z;
@@ -55,12 +56,12 @@ public class TileMap : MonoBehaviour {
 					int squareIndex = z*size_x + x;
 					int triOffset = squareIndex*6;
 					triangles[triOffset+0] = z * vsize_x + x + 0;
-					triangles[triOffset+2 ] = z*vsize_x + x + vsize_x + 1;
-					triangles[triOffset+1] = z* vsize_x + x + vsize_x + 1;
+					triangles[triOffset+1 ] = z*vsize_x + x + vsize_x + 0;
+					triangles[triOffset+2] = z* vsize_x + x + vsize_x + 1;
 					
 					triangles[triOffset+ 3 ] = z * vsize_x + x + 0;
-					triangles[triOffset + 5] = z *vsize_x + x + 1;
-					triangles[triOffset+4 ] = z * vsize_x + x + 1;
+					triangles[triOffset + 4] = z *vsize_x + x + vsize_x + 1;
+					triangles[triOffset+5] = z * vsize_x + x + 1;
 					
 				}
 			}
