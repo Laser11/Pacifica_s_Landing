@@ -43,12 +43,27 @@ public class TileMap : MonoBehaviour {
 				{
 					vertices[z * vsize_x + x] = new Vector3(x*tileSize,0,z*tileSize);
 					normal[z* vsize_x + x] = new Vector3(x*tileSize,1,z*tileSize);
-					float uv_x = (float)x/vsize_x;
-					float uv_z = (float)z/vsize_z;
-					uv[z* vsize_x + x]  = new Vector2(uv_x,uv_z);
+					float uv_x = (float)x/size_x;
+					float uv_z = (float)z/size_z;
+					uv[z* size_x + x]  = new Vector2(uv_x,uv_z);
 				} 
 
 			}	
+			for(z = 0; z< size_z; z++)
+			{
+				for(x = 0; x< size_x; x++) {
+					int squareIndex = z*size_x + x;
+					int triOffset = squareIndex*6;
+					triangles[triOffset+0] = z * vsize_x + x + 0;
+					triangles[triOffset+2 ] = z*vsize_x + x + vsize_x + 1;
+					triangles[triOffset+1] = z* vsize_x + x + vsize_x + 1;
+					
+					triangles[triOffset+ 3 ] = z * vsize_x + x + 0;
+					triangles[triOffset + 5] = z *vsize_x + x + 1;
+					triangles[triOffset+4 ] = z * vsize_x + x + 1;
+					
+				}
+			}
 				Mesh mesh = new Mesh();
 				mesh.vertices = vertices;
 				mesh.triangles = triangles;
