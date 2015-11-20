@@ -8,6 +8,7 @@ public class CameraControls : MonoBehaviour {
     public int ZoomSensitivity;
     //indicates max zoom
     public float zoomCeiling;
+    public float zoomFloor;
 
     private float speed;
  
@@ -57,7 +58,7 @@ public class CameraControls : MonoBehaviour {
     }
     void CameraZoom(float mPosZ)
     {
-        if ( (transform.position.y <=zoomCeiling && mPosZ<0) || (transform.position.y >0 &&mPosZ>0))
+        if ( (transform.position.y <=zoomCeiling && mPosZ<0) || (transform.position.y>zoomFloor &&mPosZ>0))
         {
         transform.Translate(0, 0, mPosZ * ZoomSensitivity);
         }
