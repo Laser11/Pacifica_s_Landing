@@ -1,4 +1,5 @@
-﻿public class TDTile
+﻿using UnityEngine;
+public class TDTile
 {
 
     public const int TILE_OCEAN = 0;
@@ -21,6 +22,7 @@
     public int position;
     public int distance;
     public TDTile previousTile;
+    public Player player;
 
 
     public TDTile()
@@ -51,7 +53,12 @@
         this.width = width;
         this.height = height;
         this.position = position;
+        if(occupied == 1)
+        {
+            this.player = new Player(5, new Vector3(x,0,y));
+        }
     }
+
 
     public int getType()
     {
@@ -67,6 +74,32 @@
     {
         this.type = type;
 
+    }
+
+    public Player getPlayer()
+    {
+        return this.player;
+    }
+
+    public void setPlayer(Player player)
+    {
+        this.player = new Player(player);
+    }
+
+    public void removePlayer()
+    {
+        if (player != null)
+        {
+            player.destroyPlayerObject();
+            this.player = null;
+        }
+    }
+
+    public void switchPlayers(TDTile other)
+    {
+        Player switchPlayer = this.getPlayer();
+        this.setPlayer(other.getPlayer());
+        other.setPlayer(switchPlayer);
     }
 
     public void setOccupied(int occupied)

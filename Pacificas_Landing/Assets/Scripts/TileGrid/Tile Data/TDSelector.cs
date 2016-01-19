@@ -77,10 +77,13 @@ public class TDSelector : MonoBehaviour
         }
         if (moving >= 0)
         {
+            TDTile next = (TDTile)path.getPath()[moving];
             Debug.Log(moving);
-            occupy.setOccupied(0);
-            occupy = (TDTile)path.getPath()[moving];
-            occupy.setOccupied(1);
+            occupy.removePlayer();
+            map.setTile(next.position, 1, 1);
+            map.setTile(occupy.position, 1, 0);
+            //occupy.switchPlayers(next);
+            occupy = next;
             _TGMap.UpdateGraphics();
             moving -= 1;
         }
