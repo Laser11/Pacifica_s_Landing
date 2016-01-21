@@ -15,7 +15,8 @@ public class CameraControls : MonoBehaviour {
     public float pitchFloor;
 
     private float speed;
-    private float rotation;
+    private float VrotationAmount;
+	private Vector3 rotation;
 	// Use this for initialization
 	void Start () {
 	
@@ -38,7 +39,7 @@ public class CameraControls : MonoBehaviour {
     void KeyMove(float mPosX, float mPosY)
     {
         speed = Sensitivity * Time.deltaTime;
-        rotation = rotationSensitivity * 5 * Time.deltaTime;
+        VrotationAmount = rotationSensitivity * 5 * Time.deltaTime;
         if (Input.GetKey("w") || mPosY >= Screen.height)//up
         {
 
@@ -60,14 +61,15 @@ public class CameraControls : MonoBehaviour {
         }
         
         //controls the pitch of the camera; be careful setting limits near 90 and 0
-        if (Input.GetKey("q") && this.transform.rotation.eulerAngles.x > pitchCeiling)
+        if (Input.GetKey("q") && rotation.x > pitchCeiling)
         {
-            this.transform.Rotate(-rotation,0,0);
+			rotation.x -= VrotationAmount;
         }
-        if (Input.GetKey("e") && this.transform.rotation.eulerAngles.x < pitchFloor)
+		if (Input.GetKey("e") && rotation.x < pitchFloor)
         {
-            this.transform.Rotate(rotation, 0, 0);
+			rotation.x += VrotationAmount;
         }
+		this.transform.localRotation = Quaternion.Euler(rotation);
     }
     
     //controls camera zoom/elevation
