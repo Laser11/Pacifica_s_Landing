@@ -13,12 +13,14 @@ public class CameraControls : MonoBehaviour {
     //indicates max pitch
     public float pitchCeiling;
     public float pitchFloor;
-
     private float speed;
-    private float rotation;
+    private float VrotationAmount;
+    private float HrotationAmount;
+	private Vector3 rotation;
 	// Use this for initialization
 	void Start () {
-	
+	    transform.position = new Vector3(28, 30, 18);
+        rotation = new Vector3(90,0,0);
 	}
 	
 	// Update is called once per frame
@@ -38,7 +40,8 @@ public class CameraControls : MonoBehaviour {
     void KeyMove(float mPosX, float mPosY)
     {
         speed = Sensitivity * Time.deltaTime;
-        rotation = rotationSensitivity * 5 * Time.deltaTime;
+        VrotationAmount = rotationSensitivity * 5 * Time.deltaTime;
+        HrotationAmount = rotationSensitivity * 5 * Time.deltaTime;
         if (Input.GetKey("w") || mPosY >= Screen.height)//up
         {
 
@@ -60,14 +63,24 @@ public class CameraControls : MonoBehaviour {
         }
         
         //controls the pitch of the camera; be careful setting limits near 90 and 0
-        if (Input.GetKey("q") && this.transform.rotation.eulerAngles.x > pitchCeiling)
+        if (Input.GetKey("z") && rotation.x > pitchCeiling)
         {
-            this.transform.Rotate(-rotation,0,0);
+			rotation.x -= VrotationAmount;
         }
-        if (Input.GetKey("e") && this.transform.rotation.eulerAngles.x < pitchFloor)
+		if (Input.GetKey("v") && rotation.x < pitchFloor)
         {
-            this.transform.Rotate(rotation, 0, 0);
+			rotation.x += VrotationAmount;
         }
+		this.transform.localRotation = Quaternion.Euler(rotation);
+        if (Input.GetKey("x"))
+        {
+            rotation.y += HrotationAmount;
+        }
+        if (Input.GetKey("c"))
+        {
+            rotation.y -= HrotationAmount;   
+        }
+        this.transform.localRotation = Quaternion.Euler(rotation);
     }
     
     //controls camera zoom/elevation
