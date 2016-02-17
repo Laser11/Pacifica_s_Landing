@@ -64,14 +64,18 @@ public class TGMap : MonoBehaviour
         int[] triangles = new int[numTris * 3];
 
         int x, z;
+        int[] Relevamt = TextureInitialization.getRedAssets();
+        //int[] heightMap = TextureInitialization.getRedAssets();
         for (z = 0; z < vsize_z; z++)
         {
             for (x = 0; x < vsize_x; x++)
             {
-                vertices[z * vsize_x + x] = new Vector3(x * tileSize, 0, z * tileSize);
+				int height = Relevamt[z* vsize_x + x];//heightMap[z * vsize_x  + x];
+                vertices[z * vsize_x + x] = new Vector3(x * tileSize, height, z * tileSize);
                 normals[z * vsize_x + x] = Vector3.up;
                 uv[z * vsize_x + x] = new Vector2((float)x / size_x, (float)z / size_z);
             }
+           //Debug.Log(""+ heightMap[z*vsize_x + 1]);
         }
         Debug.Log("Done Verts!");
 
