@@ -36,12 +36,14 @@ public class CameraControls : MonoBehaviour {
 
     /// <summary>
     /// controls WASD camera movements
+    /// mPosX and mPosY take the position of the mouse for when draggon the camera
     /// </summary>
     void KeyMove(float mPosX, float mPosY)
     {
         speed = Sensitivity * Time.deltaTime;
         VrotationAmount = rotationSensitivity * 5 * Time.deltaTime;
         HrotationAmount = rotationSensitivity * 5 * Time.deltaTime;
+        GameObject compass = GameObject.Find("Compass");
         if (Input.GetKey("w") || mPosY >= Screen.height)//up
         {
 
@@ -74,11 +76,13 @@ public class CameraControls : MonoBehaviour {
 		this.transform.localRotation = Quaternion.Euler(rotation);
         if (Input.GetKey("x"))
         {
-            rotation.y += HrotationAmount;
+            compass.transform.Rotate(0, 0, HrotationAmount);
+            rotation.y = compass.transform.eulerAngles.z;
         }
         if (Input.GetKey("c"))
         {
-            rotation.y -= HrotationAmount;   
+            compass.transform.Rotate(0,0,-HrotationAmount);
+            rotation.y = compass.transform.eulerAngles.z;
         }
         this.transform.localRotation = Quaternion.Euler(rotation);
     }
