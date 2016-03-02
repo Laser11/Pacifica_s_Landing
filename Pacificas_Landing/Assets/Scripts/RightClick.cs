@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class RightClick : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -14,7 +15,8 @@ public class RightClick : MonoBehaviour {
         if (Input.GetMouseButtonDown(1))
         {
             this.transform.position = Input.mousePosition;
-
+            
         }
+        
     }
    }
