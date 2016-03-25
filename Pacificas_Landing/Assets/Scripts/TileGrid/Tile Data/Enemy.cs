@@ -3,35 +3,35 @@ using System.Collections;
 
 
 
-public class Player
+public class Enemy
 {
 
     private int health;
     private int attack;
     private int movement;
     private Vector3 position;
-    private GameObject playerObject; //= GameObject.CreatePrimitive(PrimitiveType.Cube);//(GameObject)Resources.Load("/Objects/Prefabs/Players.prefab");
+    private GameObject enemyObject;// = GameObject.CreatePrimitive(PrimitiveType.Cube);//(GameObject)Resources.Load("/Objects/Prefabs/Players.prefab");
     private int maxHealth;
 
-    public Player(int maxHealth, Vector3 position)
+    public Enemy(int maxHealth, Vector3 position)
     {
 
         setPosition(position);
         setMaxHealth(maxHealth);
         setHealth(maxHealth);
-        //GameObject.Instantiate(playerObject,position, Quaternion.identity);
+        //GameObject.Instantiate(enemyObject,position, Quaternion.identity);
 
     }
 
-    public Player(Player copy)
+    public Enemy(Enemy copy)
     {
         if (copy != null)
         {
             setPosition(copy.getPosition());
             setMaxHealth(copy.getMaxHealth());
             setHealth(copy.getMaxHealth());
-            //playerObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            //GameObject.Instantiate(playerObject, position, Quaternion.identity);
+            //enemyObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            //GameObject.Instantiate(enemyObject, position, Quaternion.identity);
         }
     }
     public int getHealth()
@@ -62,23 +62,23 @@ public class Player
     public void setPosition(Vector3 position)
     {
         this.position = position;
-        //GameObject.Instantiate(playerObject, position, Quaternion.identity);
+        //GameObject.Instantiate(enemyObject, position, Quaternion.identity);
     }
 
-    public GameObject getPlayerObject()
+    public GameObject getEnemyObject()
     {
-        return this.playerObject;
+        return this.enemyObject;
     }
 
-    public void destroyPlayerObject()
+    public void destroyEnemyObject()
     {
-        //GameObject.DestroyImmediate(playerObject);
+        //GameObject.DestroyImmediate(enemyObject);
     }
 
-    public void setPlayerObject(GameObject playerObject)
+    public void setEnemyObject(GameObject enemyObject)
     {
-        this.playerObject = playerObject;
-        
+        this.enemyObject = enemyObject;
+
     }
 
 }

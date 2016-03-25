@@ -81,7 +81,12 @@ public class TDSelector : MonoBehaviour
             if (map.getTile((int)currentTileCoord.x, (int)currentTileCoord.z).getOccupied() == 2)
             {
                 opponent = map.getTile((int)currentTileCoord.x, (int)currentTileCoord.z);
-                opponent.setOccupied(0);
+                opponent.getEnemy().setHealth(opponent.getEnemy().getHealth() - 3);
+                Debug.Log("Health: " + opponent.getEnemy().getHealth());
+                if(opponent.getEnemy().getHealth() <= 0)
+                {
+                    opponent.setOccupied(0);
+                }
                 _TGMap.UpdateGraphics();
 
             }

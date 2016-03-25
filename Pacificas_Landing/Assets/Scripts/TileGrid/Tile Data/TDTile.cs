@@ -23,6 +23,7 @@ public class TDTile
     public int distance;
     public TDTile previousTile;
     public Player player;
+    public Enemy enemy;
 
 
     public TDTile()
@@ -55,7 +56,11 @@ public class TDTile
         this.position = position;
         if(occupied == 1)
         {
-            //this.player = new Player(5, new Vector3(x,0,y));
+            this.player = new Player(5, new Vector3(x,0,y));
+        }
+        else if (occupied == 2)
+        {
+            this.enemy = new Enemy(5, new Vector3(x, 0, y));
         }
     }
 
@@ -81,9 +86,18 @@ public class TDTile
         return this.player;
     }
 
+    public Enemy getEnemy()
+    {
+        return this.enemy;
+    }
+
+    public void setEnemy(Enemy enemy)
+    {
+        this.enemy = new Enemy(enemy);
+    }
     public void setPlayer(Player player)
     {
-        //this.player = new Player(player);
+        this.player = new Player(player);
     }
 
     public void removePlayer()
