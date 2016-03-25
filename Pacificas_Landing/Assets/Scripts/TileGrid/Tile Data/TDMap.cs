@@ -15,6 +15,7 @@
             setTile(i, 1, 0);
         }
         setTile(733, 1, 1);
+        setTile(735, 1, 2);
     }
 
     public TDTile getTile(int x, int y)

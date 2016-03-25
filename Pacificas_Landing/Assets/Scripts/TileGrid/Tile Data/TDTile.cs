@@ -55,7 +55,7 @@ public class TDTile
         this.position = position;
         if(occupied == 1)
         {
-            this.player = new Player(5, new Vector3(x,0,y));
+            //this.player = new Player(5, new Vector3(x,0,y));
         }
     }
 
@@ -83,7 +83,7 @@ public class TDTile
 
     public void setPlayer(Player player)
     {
-        this.player = new Player(player);
+        //this.player = new Player(player);
     }
 
     public void removePlayer()

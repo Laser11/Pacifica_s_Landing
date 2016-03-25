@@ -10,6 +10,7 @@ public class TDSelector : MonoBehaviour
     TDPath path;
     int moving = -1;
     TDTile occupy;
+    TDTile opponent;
 
     Vector3 currentTileCoord;
     Vector3 playerSelectedCoord;
@@ -75,6 +76,16 @@ public class TDSelector : MonoBehaviour
             }
 
         }
+        if(Input.GetMouseButtonDown(1))
+        {
+            if (map.getTile((int)currentTileCoord.x, (int)currentTileCoord.z).getOccupied() == 2)
+            {
+                opponent = map.getTile((int)currentTileCoord.x, (int)currentTileCoord.z);
+                opponent.setOccupied(0);
+                _TGMap.UpdateGraphics();
+
+            }
+        }
         if (moving >= 0)
         {
             TDTile next = (TDTile)path.getPath()[moving];
@@ -82,7 +93,7 @@ public class TDSelector : MonoBehaviour
             occupy.removePlayer();
             map.setTile(next.position, 1, 1);
             map.setTile(occupy.position, 1, 0);
-            //occupy.switchPlayers(next);
+            occupy.switchPlayers(next);
             occupy = next;
             _TGMap.UpdateGraphics();
             moving -= 1;
