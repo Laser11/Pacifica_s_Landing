@@ -15,6 +15,7 @@
             setTile(i, 1, 0);
         }
         setTile(733, 1, 1);
+        setTile(734, 3, 0);
         setTile(735, 1, 2);
     }
 

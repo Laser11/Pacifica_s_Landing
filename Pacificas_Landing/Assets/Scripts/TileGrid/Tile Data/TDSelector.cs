@@ -11,6 +11,7 @@ public class TDSelector : MonoBehaviour
     int moving = -1;
     TDTile occupy;
     TDTile opponent;
+    TDTile attacker;
 
     Vector3 currentTileCoord;
     Vector3 playerSelectedCoord;
@@ -81,8 +82,44 @@ public class TDSelector : MonoBehaviour
             if (map.getTile((int)currentTileCoord.x, (int)currentTileCoord.z).getOccupied() == 2)
             {
                 opponent = map.getTile((int)currentTileCoord.x, (int)currentTileCoord.z);
-                opponent.getEnemy().setHealth(opponent.getEnemy().getHealth() - 3);
-                Debug.Log("Health: " + opponent.getEnemy().getHealth());
+                attacker = map.getTile((int)playerSelectedCoord.x, (int)playerSelectedCoord.z);
+                float hitRoll = Random.Range(0, 10);
+                float cover = 0;
+                //cover calculations
+                Debug.Log(opponent.x + "And" + attacker.x + "ys = " + opponent.y + "And " + attacker.y);
+                Debug.Log("Neighbors: " + map.getTile(opponent.findNeighbors()[0]).getType() + ", " + map.getTile(opponent.findNeighbors()[1]).getType() + ", " + map.getTile(opponent.findNeighbors()[2]).getType() + ", " + map.getTile(opponent.findNeighbors()[3]).getType());
+                if(opponent.x > attacker.x && map.getTile(opponent.findNeighbors()[1]).getType() == 3)
+                {
+                    Debug.Log("Covered! Left");
+                    cover = 2;
+                }
+                else if (opponent.x < attacker.x && map.getTile(opponent.findNeighbors()[2]).getType() == 3)
+                {
+                    Debug.Log("Covered! Right");
+                    cover = 2;
+                }
+                else if (opponent.y > attacker.y && map.getTile(opponent.findNeighbors()[0]).getType() == 3)
+                {
+                    Debug.Log("Covered! Down");
+                    cover = 2;
+                }
+                else if (opponent.y < attacker.y && map.getTile(opponent.findNeighbors()[3]).getType() == 3)
+                {
+                    Debug.Log("Covered! Up");
+                    cover = 2;
+                }
+                Debug.Log("Cover Bonus! " + cover);
+                //hit
+                Debug.Log("HitRoll = " + hitRoll);
+                if((hitRoll - (cover * 3)) > 1) //90% base, -30 for half, -60 for fullcover
+                {
+                    opponent.getEnemy().setHealth(opponent.getEnemy().getHealth() - 3);
+                    Debug.Log("Hit! Health: " + opponent.getEnemy().getHealth());
+                }
+                else
+                {
+
+                }
                 if(opponent.getEnemy().getHealth() <= 0)
                 {
                     opponent.setOccupied(0);
