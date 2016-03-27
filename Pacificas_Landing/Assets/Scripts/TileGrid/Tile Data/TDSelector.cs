@@ -88,22 +88,26 @@ public class TDSelector : MonoBehaviour
                 //cover calculations
                 Debug.Log(opponent.x + "And" + attacker.x + "ys = " + opponent.y + "And " + attacker.y);
                 Debug.Log("Neighbors: " + map.getTile(opponent.findNeighbors()[0]).getType() + ", " + map.getTile(opponent.findNeighbors()[1]).getType() + ", " + map.getTile(opponent.findNeighbors()[2]).getType() + ", " + map.getTile(opponent.findNeighbors()[3]).getType());
-                if(opponent.x > attacker.x && map.getTile(opponent.findNeighbors()[1]).getType() == 3)
+                //Left cover
+                if ((opponent.x > attacker.x && map.getTile(opponent.findNeighbors()[1]).getType() == 3)&& !((Mathf.Abs(opponent.x-attacker.x) == 1 && (map.getTile(attacker.findNeighbors()[0]).getType() == 3)) || map.getTile(attacker.findNeighbors()[3]).getType() == 3))
                 {
                     Debug.Log("Covered! Left");
                     cover = 2;
                 }
-                else if (opponent.x < attacker.x && map.getTile(opponent.findNeighbors()[2]).getType() == 3)
+                //Right Cover
+                else if (opponent.x < attacker.x && map.getTile(opponent.findNeighbors()[2]).getType() == 3 && !((Mathf.Abs(opponent.x - attacker.x) == 1 && (map.getTile(attacker.findNeighbors()[0]).getType() == 3)) || map.getTile(attacker.findNeighbors()[3]).getType() == 3))
                 {
                     Debug.Log("Covered! Right");
                     cover = 2;
                 }
-                else if (opponent.y > attacker.y && map.getTile(opponent.findNeighbors()[0]).getType() == 3)
+                //Down Cover
+                else if (opponent.y > attacker.y && map.getTile(opponent.findNeighbors()[0]).getType() == 3 && !((Mathf.Abs(opponent.x - attacker.x) == 1 && (map.getTile(attacker.findNeighbors()[1]).getType() == 3)) || map.getTile(attacker.findNeighbors()[2]).getType() == 3))
                 {
                     Debug.Log("Covered! Down");
                     cover = 2;
                 }
-                else if (opponent.y < attacker.y && map.getTile(opponent.findNeighbors()[3]).getType() == 3)
+                //Up Cover
+                else if (opponent.y < attacker.y && map.getTile(opponent.findNeighbors()[3]).getType() == 3 && !((Mathf.Abs(opponent.x - attacker.x) == 1 && (map.getTile(attacker.findNeighbors()[1]).getType() == 3)) || map.getTile(attacker.findNeighbors()[2]).getType() == 3))
                 {
                     Debug.Log("Covered! Up");
                     cover = 2;
