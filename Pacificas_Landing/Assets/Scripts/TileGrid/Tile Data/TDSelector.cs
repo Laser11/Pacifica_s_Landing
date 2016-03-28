@@ -101,13 +101,13 @@ public class TDSelector : MonoBehaviour
                     cover = 2;
                 }
                 //Down Cover
-                else if (opponent.y > attacker.y && map.getTile(opponent.findNeighbors()[0]).getType() == 3 && !((Mathf.Abs(opponent.x - attacker.x) == 1 && (map.getTile(attacker.findNeighbors()[1]).getType() == 3)) || map.getTile(attacker.findNeighbors()[2]).getType() == 3))
+                else if (opponent.y > attacker.y && map.getTile(opponent.findNeighbors()[0]).getType() == 3 && !((Mathf.Abs(opponent.y - attacker.y) == 1 && (map.getTile(attacker.findNeighbors()[1]).getType() == 3)) || map.getTile(attacker.findNeighbors()[2]).getType() == 3))
                 {
                     Debug.Log("Covered! Down");
                     cover = 2;
                 }
                 //Up Cover
-                else if (opponent.y < attacker.y && map.getTile(opponent.findNeighbors()[3]).getType() == 3 && !((Mathf.Abs(opponent.x - attacker.x) == 1 && (map.getTile(attacker.findNeighbors()[1]).getType() == 3)) || map.getTile(attacker.findNeighbors()[2]).getType() == 3))
+                else if (opponent.y < attacker.y && map.getTile(opponent.findNeighbors()[3]).getType() == 3 && !((Mathf.Abs(opponent.y - attacker.y) == 1 && (map.getTile(attacker.findNeighbors()[1]).getType() == 3)) || map.getTile(attacker.findNeighbors()[2]).getType() == 3))
                 {
                     Debug.Log("Covered! Up");
                     cover = 2;
